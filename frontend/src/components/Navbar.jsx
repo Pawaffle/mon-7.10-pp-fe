@@ -3,11 +3,13 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinner from "./LoadingSpinner";
 import ThemeContext from "../context/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
+import { useAuth } from "../hooks/useAuth";
 
 const Navbar = () => {
-  const { isAuthenticated, clearUser, email, isLoading } = useContext(AuthContext);
-  const { toggleTheme } = useContext(ThemeContext);
-
+  const { isAuthenticated, clearUser, email, isLoading } = useAuth();
+    const { toggleTheme } = useTheme(); // Access the theme context using the custom hook
+ 
   const handleClick = (e) => {
     clearUser(); // Log the user out by clearing their authentication data
   };
@@ -36,7 +38,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      <button onClick={toggleTheme}>Toggle</button>
+      <button onClick={toggleTheme}>Toggle Theme</button>;
     </nav>
   );
 };
